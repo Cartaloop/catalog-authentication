@@ -8,6 +8,16 @@
 
 > ## Sobre o projeto
 > Esse projeto trata-se de uma web API de um catálogo de produtos com login e registro de usuários, onde existem usuários administradores que possuem acessos a requisições de gerenciamento dos produtos, enquanto que os usuários comuns apenas podem solicitar requisições do tipo GET específicas ao servidor.
+> ### Tecnologias
+> - Java 21
+> - Springboot web
+> - Spring Security
+> - JWT
+> - PostgreSQL
+> - Flyway
+> - Swagger
+> - Docker
+> - Lombok
 
 ### Ajustes e melhorias
 
