@@ -1,6 +1,7 @@
 package edu.lucasrech.catalog_authentication.service;
 
 import edu.lucasrech.catalog_authentication.model.Product;
+import edu.lucasrech.catalog_authentication.model.enums.Category;
 import edu.lucasrech.catalog_authentication.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,8 @@ public class ProductService {
     }
 
     public List<Product> getProductsByCategory(String category) {
-        return productRepository.findByCategory(category);
+        Category categoryEnum = Category.valueOf(category.toUpperCase());;
+        return productRepository.findByCategory(categoryEnum);
     }
 
     public List<Product> searchByName(String name) {

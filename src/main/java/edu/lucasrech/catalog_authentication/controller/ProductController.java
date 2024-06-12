@@ -1,6 +1,7 @@
 package edu.lucasrech.catalog_authentication.controller;
 
 import edu.lucasrech.catalog_authentication.model.Product;
+import edu.lucasrech.catalog_authentication.model.enums.Category;
 import edu.lucasrech.catalog_authentication.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
