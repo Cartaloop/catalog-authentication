@@ -1,5 +1,8 @@
 package edu.lucasrech.catalog_authentication.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.lucasrech.catalog_authentication.model.enums.Category;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,6 +20,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @JsonIgnore
     private String id;
 
     @Column(nullable = false)
@@ -29,6 +33,7 @@ public class Product {
     private double price;
 
     @Column(name = "image_url", nullable = false)
+    @JsonProperty("image_url")
     private String imageUrl;
 
     @Enumerated(EnumType.STRING)
