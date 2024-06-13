@@ -26,7 +26,8 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Criação da classe de domínio Product
 - [x] Implementação do repositório de Product
 - [x] Criação da classe Service
-- [ ] Criação e implementação do controller de Product
+- [x] Criação e implementação do controller de Product
+- [x] Implementação de DTO
 - [ ] Implementação do Swagger
 - [ ] Tratamento de erros da camada de Product
 - [ ] Implementação da camada de usuário
