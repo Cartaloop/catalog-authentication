@@ -1,6 +1,7 @@
 package edu.lucasrech.catalog_authentication.controller;
 
 import edu.lucasrech.catalog_authentication.model.Product;
+import edu.lucasrech.catalog_authentication.model.dtos.ProductDTO;
 import edu.lucasrech.catalog_authentication.model.enums.Category;
 import edu.lucasrech.catalog_authentication.service.ProductService;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO product) {
         return ResponseEntity.ok().body(productService.createProduct(product));
     }
 

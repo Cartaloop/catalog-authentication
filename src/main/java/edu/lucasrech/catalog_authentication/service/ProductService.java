@@ -1,6 +1,7 @@
 package edu.lucasrech.catalog_authentication.service;
 
 import edu.lucasrech.catalog_authentication.model.Product;
+import edu.lucasrech.catalog_authentication.model.dtos.ProductDTO;
 import edu.lucasrech.catalog_authentication.model.enums.Category;
 import edu.lucasrech.catalog_authentication.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -25,8 +26,9 @@ public class ProductService {
         return productRepository.findById(id).orElse(null);
     }
 
-    public Product createProduct(Product product) {
-        return productRepository.save(product);
+    public Product createProduct(ProductDTO product) {
+        Product newProduct = new Product(product);
+        return productRepository.save(newProduct);
     }
 
     public Product updateProduct(String id, Product product) {
