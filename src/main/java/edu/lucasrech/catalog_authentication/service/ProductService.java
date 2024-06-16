@@ -36,7 +36,14 @@ public class ProductService {
     }
 
     public Product createProduct(ProductDTO product) throws ValueExpectedException {
-        if(product.description().isEmpty() || product.name().isEmpty() || product.price() == 0) throw new ValueExpectedException();
+        if(product.description().isEmpty() || product.name().isEmpty() || product.price() == 0) {
+            final String[] values = new String[2];
+            values[0] = product.description();
+            values[1] = product.name();
+            values[2] = Double.toString(product.price());
+
+            throw new ValueExpectedException(values);
+        }
 
 
         Product newProduct = new Product(product);
