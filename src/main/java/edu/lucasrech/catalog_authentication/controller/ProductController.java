@@ -1,5 +1,6 @@
 package edu.lucasrech.catalog_authentication.controller;
 
+import edu.lucasrech.catalog_authentication.exception.ValueExpectedException;
 import edu.lucasrech.catalog_authentication.model.Product;
 import edu.lucasrech.catalog_authentication.model.dtos.ProductDTO;
 import edu.lucasrech.catalog_authentication.service.ProductService;
@@ -48,7 +49,7 @@ public class ProductController {
 
     @Operation(summary = "Cadastra um novo produto no banco de dados.", method = "POST")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO product) {
+    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO product) throws ValueExpectedException {
         return ResponseEntity.ok().body(productService.createProduct(product));
     }
 
