@@ -1,8 +1,8 @@
 package edu.lucasrech.catalog_authentication.exception;
 
-public class EntityNotFoundException extends Exception {
+public class EntityIdNotFoundException extends Exception {
     private final String request;
-    public EntityNotFoundException(String message, String request) {
+    public EntityIdNotFoundException(String message, String request) {
         super(message);
         this.request = request;
     }
