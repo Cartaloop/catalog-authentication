@@ -1,13 +1,17 @@
 package edu.lucasrech.catalog_authentication.service;
 
+import edu.lucasrech.catalog_authentication.exception.ValueExpectedException;
 import edu.lucasrech.catalog_authentication.model.Product;
 import edu.lucasrech.catalog_authentication.model.dtos.ProductDTO;
 import edu.lucasrech.catalog_authentication.model.enums.Category;
 import edu.lucasrech.catalog_authentication.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+import  edu.lucasrech.catalog_authentication.exception.EntityIdNotFoundException;
+
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -23,12 +27,21 @@ public class ProductService {
     }
 
     public Product getProductById(String id) {
-        return productRepository.findById(id).orElse(null);
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()) {
+            return product.get();
+        } else {
+            return null;
+        }
     }
 
-    public Product createProduct(ProductDTO product) {
+    public Product createProduct(ProductDTO product) throws ValueExpectedException {
+        if(product.description().isEmpty() || product.name().isEmpty() || product.price() == 0) throw new ValueExpectedException();
+
+
         Product newProduct = new Product(product);
-        return productRepository.save(newProduct);
+        productRepository.save(newProduct);
+        return newProduct;
     }
 
     public Product updateProduct(String id, Product product) {
