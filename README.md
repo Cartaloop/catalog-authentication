@@ -28,7 +28,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Criação da classe Service
 - [x] Criação e implementação do controller de Product
 - [x] Implementação de DTO
-- [ ] Implementação do Swagger
+- [x] Implementação do Swagger
 - [ ] Tratamento de erros da camada de Product
 - [ ] Implementação da camada de usuário
 - [ ] Implementação da autenticação com JWT
