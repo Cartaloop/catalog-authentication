@@ -36,6 +36,11 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [ ] Dockerizando a aplicação
 - [ ] Front-end da aplicação
 
+### A fazer no próximo dia
+- Criar DTO para entidade Product
+- Criar exceção para valores válidos no enum Category
+- Testes unitários para o serviço de Product
+
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
