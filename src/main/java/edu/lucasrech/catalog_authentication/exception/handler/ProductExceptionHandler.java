@@ -1,7 +1,5 @@
 package edu.lucasrech.catalog_authentication.exception.handler;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.lucasrech.catalog_authentication.dto.ErrorResponseDTO;
 import edu.lucasrech.catalog_authentication.exception.EntityIdNotFoundException;
 import edu.lucasrech.catalog_authentication.exception.ValueExpectedException;
@@ -20,7 +18,7 @@ public class ProductExceptionHandler {
     public ErrorResponseDTO entityNotFound(EntityIdNotFoundException e) {
         return new ErrorResponseDTO(
                 e.getMessage(),
-                HttpStatus.NOT_FOUND,
+                "404",
                 e.getRequest()
         );
     }
@@ -32,7 +30,7 @@ public class ProductExceptionHandler {
         String stringOfValues = String.join(", ", e.getRequest());
         return new ErrorResponseDTO(
                 e.getMessage(),
-                HttpStatus.BAD_REQUEST,
+                "400",
                 stringOfValues
         );
     }
