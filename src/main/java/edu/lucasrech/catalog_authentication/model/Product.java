@@ -1,9 +1,8 @@
 package edu.lucasrech.catalog_authentication.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import edu.lucasrech.catalog_authentication.model.dtos.ProductDTO;
+import edu.lucasrech.catalog_authentication.dto.ProductDTO;
 import edu.lucasrech.catalog_authentication.model.enums.Category;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,7 +22,6 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @JsonIgnore
     private UUID id;
 
     @Column(nullable = false)
@@ -44,10 +42,13 @@ public class Product {
     private Category category;
 
     public Product (ProductDTO productDTO) {
+        this.id = UUID.randomUUID();
         this.name = productDTO.name();
         this.description = productDTO.description();
         this.price = productDTO.price();
-        this.imageUrl = productDTO.imageUrl();
+        this.imageUrl = productDTO.image_url();
         this.category = productDTO.category();
     }
+
+
 }
