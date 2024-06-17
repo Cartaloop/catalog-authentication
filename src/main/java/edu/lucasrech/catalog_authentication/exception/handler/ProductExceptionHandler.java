@@ -27,7 +27,16 @@ public class ProductExceptionHandler {
     @ExceptionHandler(ValueExpectedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponseDTO valueException(ValueExpectedException e) {
-        String stringOfValues = String.join(", ", e.getRequest());
+        String[] formatedArray = new String[3];
+        for(int i = 0; i <= 3; i++) {
+            switch (i){
+                case 0: formatedArray[i] = "Name: " + e.getRequest()[i]; break;
+                case 1: formatedArray[i] = "Description: " + e.getRequest()[i]; break;
+                case 2: formatedArray[i] = "Price: " + e.getRequest()[i]; break;
+            }
+
+        }
+        String stringOfValues = String.join(", ", formatedArray);
         return new ErrorResponseDTO(
                 e.getMessage(),
                 "400",
