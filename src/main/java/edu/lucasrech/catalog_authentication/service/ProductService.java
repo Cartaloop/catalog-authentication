@@ -2,12 +2,11 @@ package edu.lucasrech.catalog_authentication.service;
 
 import edu.lucasrech.catalog_authentication.exception.ValueExpectedException;
 import edu.lucasrech.catalog_authentication.model.Product;
-import edu.lucasrech.catalog_authentication.model.dtos.ProductDTO;
+import edu.lucasrech.catalog_authentication.dto.ProductDTO;
 import edu.lucasrech.catalog_authentication.model.enums.Category;
 import edu.lucasrech.catalog_authentication.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
-import  edu.lucasrech.catalog_authentication.exception.EntityIdNotFoundException;
 
 
 import java.util.List;
@@ -28,26 +27,21 @@ public class ProductService {
 
     public Product getProductById(String id) {
         Optional<Product> product = productRepository.findById(id);
-        if (product.isPresent()) {
-            return product.get();
-        } else {
-            return null;
-        }
+        return product.orElse(null);
     }
 
     public Product createProduct(ProductDTO product) throws ValueExpectedException {
+        Product newProduct = new Product(product);
         if(product.description().isEmpty() || product.name().isEmpty() || product.price() == 0) {
-            final String[] values = new String[2];
+            final String[] values = new String[3];
             values[0] = product.description();
             values[1] = product.name();
             values[2] = Double.toString(product.price());
-
             throw new ValueExpectedException(values);
+
+        } else {
+            productRepository.save(newProduct);
         }
-
-
-        Product newProduct = new Product(product);
-        productRepository.save(newProduct);
         return newProduct;
     }
 
@@ -72,7 +66,7 @@ public class ProductService {
     }
 
     public List<Product> getProductsByCategory(String category) {
-        Category categoryEnum = Category.valueOf(category.toUpperCase());;
+        Category categoryEnum = Category.valueOf(category.toUpperCase());
         return productRepository.findByCategory(categoryEnum);
     }
 
