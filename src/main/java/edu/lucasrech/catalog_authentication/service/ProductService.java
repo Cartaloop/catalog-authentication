@@ -34,8 +34,8 @@ public class ProductService {
         Product newProduct = new Product(product);
         if(product.description().isEmpty() || product.name().isEmpty() || product.price() == 0) {
             final String[] values = new String[3];
-            values[0] = product.description();
-            values[1] = product.name();
+            values[0] = product.name();
+            values[1] = product.description();
             values[2] = Double.toString(product.price());
             throw new ValueExpectedException(values);
 
