@@ -29,8 +29,8 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Criação e implementação do controller de Product
 - [x] Implementação de DTO
 - [x] Implementação do Swagger
-- [ ] Tratamento de erros da camada de Product
-- [ ] Implementação da camada de usuário
+- [X] Tratamento de erros da camada de Product
+- [X] Implementação da camada de usuário
 - [ ] Implementação da autenticação com JWT
 - [ ] Testes Unitários com JUnit e Mockito
 - [ ] Dockerizando a aplicação
