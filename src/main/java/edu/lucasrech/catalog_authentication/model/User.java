@@ -1,5 +1,6 @@
 package edu.lucasrech.catalog_authentication.model;
 
+import edu.lucasrech.catalog_authentication.model.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,4 +25,6 @@ public class User {
     private String email;
 
     private String password;
+
+    private Role role;
 }
