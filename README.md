@@ -26,14 +26,18 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Criação da classe de domínio Product
 - [x] Implementação do repositório de Product
 - [x] Criação da classe Service
-- [ ] Criação e implementação do controller de Product
-- [ ] Implementação do Swagger
-- [ ] Tratamento de erros da camada de Product
-- [ ] Implementação da camada de usuário
+- [x] Criação e implementação do controller de Product
+- [x] Implementação de DTO
+- [x] Implementação do Swagger
+- [X] Tratamento de erros da camada de Product
+- [X] Implementação da camada de usuário
 - [ ] Implementação da autenticação com JWT
 - [ ] Testes Unitários com JUnit e Mockito
 - [ ] Dockerizando a aplicação
 - [ ] Front-end da aplicação
+
+### A fazer no próximo dia
+- Criar controller para geração de token
 
 ## 💻 Pré-requisitos
 
