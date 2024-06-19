@@ -39,6 +39,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 ### A fazer no próximo dia
 - Criar controller para geração de token
 
+
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
