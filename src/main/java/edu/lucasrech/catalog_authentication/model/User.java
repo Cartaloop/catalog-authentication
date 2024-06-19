@@ -28,4 +28,8 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public String getRole() {
+        return role.toString();
+    }
 }
