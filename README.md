@@ -37,9 +37,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [ ] Front-end da aplicação
 
 ### A fazer no próximo dia
-- Criar DTO para entidade Product
-- Criar exceção para valores válidos no enum Category
-- Testes unitários para o serviço de Product
+- Criar controller para geração de token
 
 ## 💻 Pré-requisitos
 
