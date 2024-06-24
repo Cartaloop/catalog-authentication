@@ -1,8 +1,8 @@
 package edu.lucasrech.catalog_authentication.controller;
 
 import edu.lucasrech.catalog_authentication.exception.ValueExpectedException;
-import edu.lucasrech.catalog_authentication.model.Product;
-import edu.lucasrech.catalog_authentication.dto.ProductDTO;
+import edu.lucasrech.catalog_authentication.model.product.Product;
+import edu.lucasrech.catalog_authentication.model.product.ProductDTO;
 import edu.lucasrech.catalog_authentication.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

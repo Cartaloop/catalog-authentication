@@ -1,5 +1,14 @@
 package edu.lucasrech.catalog_authentication.model.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum Role {
-    ADMIN, USER
+    ADMIN("admin"),
+    USER("user");
+
+    private String role;
+    Role(String role) {
+        this.role = role;
+    }
 }
