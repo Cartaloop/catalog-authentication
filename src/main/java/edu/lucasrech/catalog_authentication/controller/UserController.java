@@ -1,23 +1,19 @@
 package edu.lucasrech.catalog_authentication.controller;
 
 import edu.lucasrech.catalog_authentication.configuration.security.TokenService;
-import edu.lucasrech.catalog_authentication.model.user.LoginRequestDTO;
-import edu.lucasrech.catalog_authentication.model.user.LoginResponseDTO;
-import edu.lucasrech.catalog_authentication.model.user.RegisterRequestDTO;
-import edu.lucasrech.catalog_authentication.model.user.User;
+import edu.lucasrech.catalog_authentication.exception.UserNotFoundExcepiton;
+import edu.lucasrech.catalog_authentication.model.user.*;
 import edu.lucasrech.catalog_authentication.repository.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -57,6 +53,16 @@ public class UserController {
 
         String token = tokenService.generateToken(user);
         return ResponseEntity.ok(new LoginResponseDTO(user.getUsername(), token));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteUser (@RequestBody DeleteRequestDTO userToDelete) throws UserNotFoundExcepiton {
+        if(userRepository.findByEmail(userToDelete.email()).isEmpty()) {
+            throw new UserNotFoundExcepiton("User not found.");
+        }
+        User user = userRepository.findByEmail(userToDelete.email()).get();
+        userRepository.delete(user);
+        return ResponseEntity.ok().build();
     }
 
 
