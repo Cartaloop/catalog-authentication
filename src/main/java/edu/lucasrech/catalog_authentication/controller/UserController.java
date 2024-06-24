@@ -48,7 +48,7 @@ public class UserController {
             return ResponseEntity.badRequest().body(new LoginResponseDTO(null, null));
         }
 
-        User user = new User(body.username(), body.email(), passwordEncoder.encode(body.password()), body.role());
+        User user = new User(body.username(), body.email(), passwordEncoder.encode(body.password()));
         userRepository.save(user);
 
         String token = tokenService.generateToken(user);
