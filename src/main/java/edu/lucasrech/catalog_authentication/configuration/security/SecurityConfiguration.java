@@ -1,5 +1,6 @@
 package edu.lucasrech.catalog_authentication.configuration.security;
 
+import edu.lucasrech.catalog_authentication.configuration.security.handler.AuthExceptionEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,9 +24,12 @@ public class SecurityConfiguration {
     SecurityFilter securityFilter;
     @Autowired
     private AuthenticationConfiguration authenticationConfiguration;
+    @Autowired
+    private AuthExceptionEntryPoint authException;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -36,10 +40,11 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/products/ct").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products/category/").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products/name").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/swagger-ui/index.html").permitAll()
+                        .requestMatchers(SWAGGER_WHITELIST).permitAll()
                         .requestMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(authException))
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
@@ -53,4 +58,11 @@ public class SecurityConfiguration {
     public AuthenticationManager authenticationManager() throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
+    public static final String[] SWAGGER_WHITELIST = {
+            "swagger-ui/**",
+            "v3/api-docs/**",
+            "/swagger-resources/**",
+            "swagger-resources"
+    };
 }

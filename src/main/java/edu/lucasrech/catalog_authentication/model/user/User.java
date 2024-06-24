@@ -1,6 +1,5 @@
 package edu.lucasrech.catalog_authentication.model.user;
 
-import edu.lucasrech.catalog_authentication.model.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
