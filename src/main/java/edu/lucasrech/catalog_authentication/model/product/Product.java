@@ -2,7 +2,6 @@ package edu.lucasrech.catalog_authentication.model.product;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import edu.lucasrech.catalog_authentication.model.enums.Category;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

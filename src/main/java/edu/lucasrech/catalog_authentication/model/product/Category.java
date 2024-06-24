@@ -1,4 +1,4 @@
-package edu.lucasrech.catalog_authentication.model.enums;
+package edu.lucasrech.catalog_authentication.model.product;
 
 public enum Category {
     SMARTPHONES,
