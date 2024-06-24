@@ -18,18 +18,15 @@ import java.util.Map;
 public class AuthExceptionEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
-                         AuthenticationException authException) throws IOException, ServletException {
-        // Define o código de status HTTP e o corpo da resposta JSON
+                         AuthenticationException authException) throws IOException {
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType("application/json");
 
-        // Cria um mapa para a mensagem de erro
         Map<String, Object> body = new HashMap<>();
         body.put("status", HttpStatus.UNAUTHORIZED.value());
         body.put("error", "Unauthorized");
         body.put("message", "Authentication token is required");
 
-        // Converte o mapa para JSON e o envia como resposta
         ObjectMapper mapper = new ObjectMapper();
         OutputStream out = response.getOutputStream();
         mapper.writeValue(out, body);

@@ -6,6 +6,8 @@ import edu.lucasrech.catalog_authentication.model.user.LoginResponseDTO;
 import edu.lucasrech.catalog_authentication.model.user.RegisterRequestDTO;
 import edu.lucasrech.catalog_authentication.model.user.User;
 import edu.lucasrech.catalog_authentication.repository.UserRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -20,12 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor()
+@SecurityRequirement(name = "bearerAuth")
 public class UserController {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
 
+    @Operation(summary = "Efetua o login de um usuário administrador e caso autenticado retorna um token.", method = "POST")
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO body) {
         User user = userRepository.findByUsername(body.username())
@@ -38,6 +42,7 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Registra um novo usuário administrador. Requer token de autenticação", method = "POST")
     @RequestMapping("/register")
     public ResponseEntity<LoginResponseDTO> register(@RequestBody @NonNull RegisterRequestDTO body) {
         if(userRepository.findByUsername(body.username()).isPresent()) {

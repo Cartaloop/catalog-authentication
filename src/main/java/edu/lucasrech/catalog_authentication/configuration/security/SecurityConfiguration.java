@@ -29,6 +29,7 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -39,7 +40,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/products/ct").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products/category/").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products/name").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/swagger-ui/index.html").permitAll()
+                        .requestMatchers(SWAGGER_WHITELIST).permitAll()
                         .requestMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
@@ -57,4 +58,11 @@ public class SecurityConfiguration {
     public AuthenticationManager authenticationManager() throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
+    public static final String[] SWAGGER_WHITELIST = {
+            "swagger-ui/**",
+            "v3/api-docs/**",
+            "/swagger-resources/**",
+            "swagger-resources"
+    };
 }

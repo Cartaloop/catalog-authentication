@@ -5,6 +5,7 @@ import edu.lucasrech.catalog_authentication.model.product.Product;
 import edu.lucasrech.catalog_authentication.model.product.ProductDTO;
 import edu.lucasrech.catalog_authentication.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
