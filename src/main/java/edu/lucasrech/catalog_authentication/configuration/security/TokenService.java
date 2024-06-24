@@ -1,6 +1,6 @@
 package edu.lucasrech.catalog_authentication.configuration.security;
 
-import edu.lucasrech.catalog_authentication.model.User;
+import edu.lucasrech.catalog_authentication.model.user.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.auth0.jwt.JWT;
@@ -21,12 +21,12 @@ public class TokenService {
     public String generateToken(User user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
-            String token = JWT.create()
+            return JWT.create()
                     .withIssuer("catalog-api")
-                    .withSubject(user.getUsername())
+                    .withIssuedAt(creationDate())
                     .withExpiresAt(genExpirationDate())
+                    .withSubject(user.getUsername())
                     .sign(algorithm);
-            return token;
         } catch (JWTCreationException exception) {
             throw new RuntimeException("Could not generate token", exception);
         }
@@ -41,12 +41,17 @@ public class TokenService {
                     .verify(token)
                     .getSubject();
         } catch (JWTVerificationException exception) {
-            return "";
+            return null;
         }
+
     }
 
     private Instant genExpirationDate() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+    }
+
+    private Instant creationDate() {
+        return LocalDateTime.now().toInstant(ZoneOffset.of("-03:00"));
     }
 
 }

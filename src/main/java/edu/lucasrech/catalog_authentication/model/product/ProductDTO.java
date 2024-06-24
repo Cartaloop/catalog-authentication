@@ -1,4 +1,4 @@
-package edu.lucasrech.catalog_authentication.dto;
+package edu.lucasrech.catalog_authentication.model.product;
 
 import edu.lucasrech.catalog_authentication.model.enums.Category;
 

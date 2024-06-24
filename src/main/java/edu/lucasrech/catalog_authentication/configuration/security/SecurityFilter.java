@@ -1,20 +1,20 @@
 package edu.lucasrech.catalog_authentication.configuration.security;
 
-import edu.lucasrech.catalog_authentication.model.User;
+import edu.lucasrech.catalog_authentication.model.user.User;
 import edu.lucasrech.catalog_authentication.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Optional;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
@@ -27,23 +27,30 @@ public class SecurityFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(
+            @NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain
+    ) throws ServletException, IOException {
         var token = this.recoverToken(request);
-        if (token != null) {
-            var login = tokenService.verifyToken(token);
-            Optional<User> user = userRepository.findByUsername(login);
+        var login = tokenService.verifyToken(token);
 
-            var authentication = new UsernamePasswordAuthenticationToken(login, null, user.get().getAuthorities());
+        if (token != null) {
+            User user = userRepository.findByUsername(login).orElseThrow(() -> new UsernameNotFoundException(login));
+
+            Authentication authentication = new UsernamePasswordAuthenticationToken(
+                    login,
+                    null,
+                    user.getAuthorities()
+            );
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);
     }
 
     private String recoverToken(HttpServletRequest request) {
-        var authHeader = request.getHeader("Authorization");
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return null;
-        }
-        return authHeader.replace("Bearer ", "");
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) return null;
+        return authHeader.substring(7);
     }
 }
