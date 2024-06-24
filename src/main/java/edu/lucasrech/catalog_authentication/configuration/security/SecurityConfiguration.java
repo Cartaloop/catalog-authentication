@@ -1,5 +1,6 @@
 package edu.lucasrech.catalog_authentication.configuration.security;
 
+import edu.lucasrech.catalog_authentication.configuration.security.handler.AuthExceptionEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,8 @@ public class SecurityConfiguration {
     SecurityFilter securityFilter;
     @Autowired
     private AuthenticationConfiguration authenticationConfiguration;
+    @Autowired
+    private AuthExceptionEntryPoint authException;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -40,6 +43,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
+                .exceptionHandling(ex -> ex.authenticationEntryPoint(authException))
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
