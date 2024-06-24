@@ -1,7 +1,7 @@
 package edu.lucasrech.catalog_authentication.repository;
 
-import edu.lucasrech.catalog_authentication.model.Product;
-import edu.lucasrech.catalog_authentication.model.enums.Category;
+import edu.lucasrech.catalog_authentication.model.product.Product;
+import edu.lucasrech.catalog_authentication.model.product.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
