@@ -1,5 +1,6 @@
 package edu.lucasrech.catalog_authentication.model.user;
 
+import edu.lucasrech.catalog_authentication.model.user.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
@@ -35,17 +36,17 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User(String username, String email, String password, Role role) {
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.role = Role.ADMIN;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(role.equals(Role.ADMIN)) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        if(role.equals(Role.ADMIN)) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        else return List.of();
     }
 
     @Override

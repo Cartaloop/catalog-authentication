@@ -3,7 +3,7 @@ package edu.lucasrech.catalog_authentication.service;
 import edu.lucasrech.catalog_authentication.exception.ValueExpectedException;
 import edu.lucasrech.catalog_authentication.model.product.Product;
 import edu.lucasrech.catalog_authentication.model.product.ProductDTO;
-import edu.lucasrech.catalog_authentication.model.product.Category;
+import edu.lucasrech.catalog_authentication.model.product.enums.Category;
 import edu.lucasrech.catalog_authentication.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
